@@ -1,21 +1,3 @@
-## 실습 준비
-### 데이터셋 소개
-주요 컬럼
-- survived: 생존 여부 (0: 사망, 1: 생존)
-- pclass: 티켓 등급 (1: 1등석, 2: 2등석, 3: 3등석)
-- sex: 성별 (male, female)
-- age: 나이
-- sibsp: 동승한 형제자매/배우자 수
-- parch: 동승한 부모/자녀 수
-- ticket: 티켓 번호
-- fare: 요금
-- cabin: 객실 번호
-- embarked: 탑승 항구 (C: Cherbourg, Q: Queenstown, S: Southampton)
-
-## 1. 데이터 기본 탐색
-### 문제 1-1: 상위 5행 조회
-타이타닉 테이블에서 모든 컬럼의 상위 5개 행을 조회하세요.
-```
 USE temp;
 SELECT * FROM titanic;
 
