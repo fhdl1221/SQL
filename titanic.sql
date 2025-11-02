@@ -51,7 +51,15 @@ ORDER BY age;
 
 -- 3-1
 SELECT
+<<<<<<< HEAD
 	ROUND(AVG(survived) * 100, 2) AS 전체생존률
+=======
+	ROUND(
+		SUM(CASE
+				WHEN survived = 1 THEN 1
+				ELSE 0
+			END) / COUNT(*) * 100, 2) AS 전체생존률
+>>>>>>> 28e1175f26e91e96b4d3b4552884a0bdc97c982c
 FROM titanic;
 
 SELECT survived, COUNT(*)
@@ -62,8 +70,13 @@ GROUP BY survived;
 SELECT
 	sex,
 	COUNT(*) AS 총승객수,
+<<<<<<< HEAD
     SUM(survived) AS 생존자수,
     ROUND(AVG(survived) * 100,2) AS 생존율
+=======
+    SUM(CASE WHEN survived = 1 THEN 1 ELSE 0 END) AS 생존자수,
+    ROUND(SUM(CASE WHEN survived = 1 THEN 1 ELSE 0 END)/COUNT(*)*100,2) AS 생존율
+>>>>>>> 28e1175f26e91e96b4d3b4552884a0bdc97c982c
 FROM titanic
 GROUP BY sex
 ORDER BY 생존율 DESC;
@@ -71,7 +84,11 @@ ORDER BY 생존율 DESC;
 -- 3-3
 SELECT 
 	pclass,
+<<<<<<< HEAD
     ROUND(AVG(survived) * 100,2) AS 생존율
+=======
+    ROUND(SUM(CASE WHEN survived = 1 THEN 1 ELSE 0 END)/COUNT(*)*100,2) AS 생존율
+>>>>>>> 28e1175f26e91e96b4d3b4552884a0bdc97c982c
 FROM titanic
 GROUP BY pclass
 ORDER BY pclass;
@@ -97,8 +114,13 @@ SELECT
 	pclass,
     sex,
 	COUNT(*),
+<<<<<<< HEAD
     SUM(survived) AS 생존자수,
     AVG(survived) * 100 AS 생존율
+=======
+    SUM(CASE WHEN survived = 1 THEN 1 ELSE 0 END) AS 생존자수,
+    SUM(CASE WHEN survived = 1 THEN 1 ELSE 0 END) / COUNT(*) * 100 AS 생존율
+>>>>>>> 28e1175f26e91e96b4d3b4552884a0bdc97c982c
 FROM titanic
 GROUP BY pclass, sex
 ORDER BY pclass, sex;
@@ -109,12 +131,20 @@ SELECT
 		WHEN SibSp + Parch = 0 THEN '혼자'
         ELSE '가족동반'
 	END AS 가족동반유무,
+<<<<<<< HEAD
 	AVG(survived) * 100 AS 생존율
+=======
+	SUM(CASE WHEN survived = 1 THEN 1 ELSE 0 END) / COUNT(*) * 100 AS 생존율
+>>>>>>> 28e1175f26e91e96b4d3b4552884a0bdc97c982c
 FROM titanic
 GROUP BY 가족동반유무;
 
 SELECT
+<<<<<<< HEAD
 	AVG(survived) * 100 AS 생존율
+=======
+	SUM(CASE WHEN survived = 1 THEN 1 ELSE 0 END) / COUNT(*) * 100 AS 생존율
+>>>>>>> 28e1175f26e91e96b4d3b4552884a0bdc97c982c
 FROM titanic
 WHERE SibSp > 0 OR Parch > 0;
 
@@ -122,7 +152,11 @@ WHERE SibSp > 0 OR Parch > 0;
 SELECT 
 	(1 + SibSp + Parch) AS 가족규모,
 	COUNT(*) AS 승객수,
+<<<<<<< HEAD
     AVG(survived) * 100 AS 생존율
+=======
+    SUM(CASE WHEN survived = 1 THEN 1 ELSE 0 END) / COUNT(*) * 100 AS 생존율
+>>>>>>> 28e1175f26e91e96b4d3b4552884a0bdc97c982c
 FROM titanic
 GROUP BY 가족규모
 ORDER BY 가족규모;
@@ -134,7 +168,11 @@ SELECT
         WHEN age BETWEEN 18 AND 60 THEN 'Adult'
         ElSE 'Senior'
 	END AS 연령대,
+<<<<<<< HEAD
     AVG(survived) * 100 AS 생존율
+=======
+    SUM(CASE WHEN survived = 1 THEN 1 ELSE 0 END) / COUNT(*) * 100 AS 생존율
+>>>>>>> 28e1175f26e91e96b4d3b4552884a0bdc97c982c
 FROM titanic
 GROUP BY 연령대;
 
@@ -142,11 +180,19 @@ GROUP BY 연령대;
 SELECT
 	CASE
 		WHEN fare < 10 THEN '저가(<10)'
+<<<<<<< HEAD
         WHEN fare < 30 THEN '중저가(10-29)'
         WHEN fare < 100 THEN '중고가(30-99)'
         ELSE '고가(100+)'
     END AS 요금구간,
     AVG(survived) * 100 AS 생존율
+=======
+        WHEN fare >= 10 AND fare < 30 THEN '중저가(10-29)'
+        WHEN fare >= 30 AND fare < 100 THEN '중고가(30-99)'
+        ELSE '고가(100+)'
+    END AS 요금구간,
+    SUM(CASE WHEN survived = 1 THEN 1 ELSE 0 END) / COUNT(*) * 100 AS 생존율
+>>>>>>> 28e1175f26e91e96b4d3b4552884a0bdc97c982c
 FROM titanic
 GROUP BY 요금구간
 ORDER BY
@@ -185,4 +231,8 @@ SELECT
 FROM titanic
 WHERE pclass = 1 AND age > (SELECT AVG(age) FROM titanic WHERE pclass = 3)
 ORDER BY age DESC
+<<<<<<< HEAD
 LIMIT 20;
+=======
+LIMIT 20;
+>>>>>>> 28e1175f26e91e96b4d3b4552884a0bdc97c982c
